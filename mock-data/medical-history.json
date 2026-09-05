@@ -1,0 +1,97 @@
+[
+  {
+    "patientId": "P1001",
+    "conditions": ["Type 2 Diabetes", "High Blood Pressure"],
+    "allergies": ["Penicillin"],
+    "medications": ["Metformin", "Lisinopril"],
+    "previousTests": [
+      {
+        "testName": "Lipid Panel",
+        "date": "2023-06-15",
+        "result": "LDL slightly elevated"
+      },
+      {
+        "testName": "HbA1c",
+        "date": "2023-09-20",
+        "result": "7.2% - above target range"
+      }
+    ],
+    "notes": "Patient has been managing diabetes for 5 years. Regular monitoring recommended."
+  },
+  {
+    "patientId": "P1002",
+    "conditions": ["Hypertension", "Anxiety"],
+    "allergies": ["Sulfa drugs"],
+    "medications": ["Amlodipine", "Hydrochlorothiazide"],
+    "previousTests": [
+      {
+        "testName": "Complete Blood Count",
+        "date": "2023-08-10",
+        "result": "Normal"
+      },
+      {
+        "testName": "Thyroid Panel",
+        "date": "2023-11-05",
+        "result": "Mild hypothyroidism detected"
+      }
+    ],
+    "notes": "Blood pressure well controlled with current medication. Monitor thyroid function."
+  },
+  {
+    "patientId": "P1003",
+    "conditions": ["Coronary Artery Disease", "High Cholesterol"],
+    "allergies": ["Aspirin"],
+    "medications": ["Atorvastatin", "Clopidogrel"],
+    "previousTests": [
+      {
+        "testName": "Cardiac Enzyme Panel",
+        "date": "2023-07-22",
+        "result": "Normal"
+      },
+      {
+        "testName": "ECG",
+        "date": "2023-10-15",
+        "result": "Sinus rhythm, no abnormalities"
+      }
+    ],
+    "notes": "History of mild heart attack 2 years ago. Regular cardiac monitoring essential."
+  },
+  {
+    "patientId": "P1004",
+    "conditions": ["None"],
+    "allergies": ["None"],
+    "medications": ["None"],
+    "previousTests": [
+      {
+        "testName": "Basic Metabolic Panel",
+        "date": "2023-12-01",
+        "result": "Normal"
+      }
+    ],
+    "notes": "Generally healthy patient. Routine check-up."
+  },
+  {
+    "patientId": "P1005",
+    "conditions": ["Type 2 Diabetes", "Hypertension", "Chronic Kidney Disease"],
+    "allergies": ["None"],
+    "medications": ["Insulin", "Losartan", "Furosemide"],
+    "previousTests": [
+      {
+        "testName": "Lipid Panel",
+        "date": "2023-05-18",
+        "result": "LDL elevated"
+      },
+      {
+        "testName": "Kidney Function Test",
+        "date": "2023-09-25",
+        "result": "Stage 3 CKD - monitor closely"
+      },
+      {
+        "testName": "HbA1c",
+        "date": "2023-12-10",
+        "result": "8.1% - needs better control"
+      }
+    ],
+    "notes": "Multiple comorbidities requiring careful medication management. Frequent monitoring recommended."
+  }
+]

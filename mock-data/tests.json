@@ -1,0 +1,82 @@
+[
+  {
+    "testId": "T001",
+    "testName": "Lipid Panel",
+    "category": "Cardiovascular",
+    "description": "Measures cholesterol and triglycerides in the blood",
+    "price": 45,
+    "relevantConditions": ["Diabetes", "Heart Disease", "Hypertension"]
+  },
+  {
+    "testId": "T002",
+    "testName": "HbA1c",
+    "category": "Diabetes",
+    "description": "Measures average blood sugar levels over the past 3 months",
+    "price": 35,
+    "relevantConditions": ["Diabetes", "Prediabetes"]
+  },
+  {
+    "testId": "T003",
+    "testName": "Complete Blood Count",
+    "category": "General",
+    "description": "Measures different components of blood including red and white blood cells",
+    "price": 25,
+    "relevantConditions": ["Anemia", "Infection", "Leukemia"]
+  },
+  {
+    "testId": "T004",
+    "testName": "Thyroid Panel",
+    "category": "Endocrine",
+    "description": "Measures thyroid hormone levels to assess thyroid function",
+    "price": 55,
+    "relevantConditions": ["Hypothyroidism", "Hyperthyroidism"]
+  },
+  {
+    "testId": "T005",
+    "testName": "Cardiac Enzyme Panel",
+    "category": "Cardiovascular",
+    "description": "Measures enzymes released during heart muscle damage",
+    "price": 75,
+    "relevantConditions": ["Heart Disease", "Heart Attack"]
+  },
+  {
+    "testId": "T006",
+    "testName": "ECG",
+    "category": "Cardiovascular",
+    "description": "Electrocardiogram to measure heart electrical activity",
+    "price": 40,
+    "relevantConditions": ["Heart Disease", "Arrhythmia"]
+  },
+  {
+    "testId": "T007",
+    "testName": "Basic Metabolic Panel",
+    "category": "General",
+    "description": "Measures glucose, calcium, and electrolytes in the blood",
+    "price": 30,
+    "relevantConditions": ["Kidney Disease", "Diabetes", "Electrolyte Imbalance"]
+  },
+  {
+    "testId": "T008",
+    "testName": "Liver Function Test",
+    "category": "Hepatic",
+    "description": "Measures enzymes and proteins produced by the liver",
+    "price": 45,
+    "relevantConditions": ["Liver Disease", "Hepatitis"]
+  },
+  {
+    "testId": "T009",
+    "testName": "Kidney Function Test",
+    "category": "Renal",
+    "description": "Measures how well kidneys are filtering waste from blood",
+    "price": 35,
+    "relevantConditions": ["Kidney Disease", "Diabetes", "Hypertension"]
+  },
+  {
+    "testId": "T010",
+    "testName": "Vitamin D Test",
+    "category": "Nutritional",
+    "description": "Measures vitamin D levels in the blood",
+    "price": 40,
+    "relevantConditions": ["Vitamin D Deficiency", "Bone Disorders"]
+  }
+]

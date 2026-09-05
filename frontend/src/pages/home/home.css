@@ -1,0 +1,470 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #172033;
+}
+
+.home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px 0 40px 0;
+}
+
+.container {
+    width: 800px;
+    max-width: calc(100% - 30px);
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid #e1e5ea;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.card h3 {
+    margin: 15px 0 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.info strong {
+    color: #333;
+    font-size: 16px;
+}
+
+.info span {
+    color: #666;
+    font-size: 14px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    margin-bottom: 15px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.order {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.order span {
+    background: #f1f5f9;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 3px solid #667eea;
+}
+
+button {
+    border: none;
+    background: #667eea;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #5568d3;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.error {
+    background: #fee;
+    border: 1px solid #fcc;
+}
+
+.error p {
+    color: #c33;
+    margin: 0 0 10px 0;
+}
+
+.error button {
+    background: #c33;
+}
+
+.error button:hover {
+    background: #b33;
+}
+
+.recommendation {
+    border-left: 4px solid #667eea;
+}
+
+.recommendation-message {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.recommendation-message p {
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+}
+
+.recommendations-list {
+    margin: 20px 0;
+}
+
+.recommendation-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.recommendation-item strong {
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.recommendation-item span {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.recommendation-item p {
+    color: #666;
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.recommendation-item button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.secondary {
+    background: white;
+    color: #667eea;
+    border: 1px solid #667eea;
+}
+
+.secondary:hover {
+    background: #f8f9ff;
+}
+
+/* ── Success state ───────────────────────────────────────────── */
+.success {
+    background: #e9f8ef;
+    color: #18733c;
+    border: 1px solid #b7e4c7;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.success-scenario-note {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #2e7d52;
+}
+
+/* ── Priority badge colour variants ──────────────────────────── */
+.priority-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.priority-high {
+    background: #dc3545;
+}
+
+.priority-medium {
+    background: #fd7e14;
+}
+
+.priority-low {
+    background: #28a745;
+}
+
+/* ── Reasons bullet list ─────────────────────────────────────── */
+.reasons-list {
+    margin: 6px 0 8px 0;
+    padding-left: 20px;
+    color: #555;
+    font-size: 14px;
+}
+
+.reasons-list li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+.reason-text {
+    color: #666;
+    font-size: 14px;
+    margin: 6px 0 8px 0;
+    line-height: 1.5;
+}
+
+/* ── AI fallback banner ──────────────────────────────────────── */
+.ai-fallback-banner {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    color: #795548;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+/* ── No-gaps message ─────────────────────────────────────────── */
+.no-gaps-message {
+    color: #555;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+/* ── Confirmation dialog overlay ─────────────────────────────── */
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.confirm-dialog {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    max-width: 420px;
+    width: calc(100% - 40px);
+}
+
+.confirm-dialog h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.confirm-dialog p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.confirm-actions button {
+    flex: 1;
+}
+
+/* ── Demo Scenario dropdown row (inside Patient Selection card) ─ */
+.demo-select-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.demo-select-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+}
+
+.demo-select {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+    border-color: #f59e0b;
+    font-size: 13px;
+}
+
+.demo-select:focus {
+    border-color: #d97706;
+}
+
+.demo-select-loading {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+}
+
+.demo-scenario-card {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.demo-scenario-card.active {
+    border-color: #667eea;
+    background: #f5f6ff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scenario-number {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+}
+
+.scenario-id-badge {
+    background: #667eea;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 8px;
+}
+
+.scenario-title {
+    margin: 0;
+    font-size: 14px;
+    color: #222;
+    line-height: 1.4;
+}
+
+.scenario-description {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.scenario-expected {
+    background: white;
+    border: 1px solid #e1e5ea;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12px;
+}
+
+.scenario-expected strong {
+    display: block;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.scenario-expected ul {
+    margin: 0;
+    padding-left: 16px;
+    color: #555;
+}
+
+.scenario-expected li {
+    margin-bottom: 3px;
+    line-height: 1.4;
+}
+
+.scenario-hint {
+    font-size: 12px;
+    color: #1d6fa4;
+    background: #e8f4fd;
+    border-radius: 6px;
+    padding: 8px 10px;
+    border-left: 3px solid #667eea;
+    line-height: 1.4;
+}
+
+.scenario-btn {
+    margin-top: auto;
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active-btn {
+    background: #667eea;
+    color: white;
+}
+
+/* ── Scenario context in recommendation panel ────────────────── */
+.scenario-context-banner {
+    background: #f0f4ff;
+    border: 1px solid #c7d2fe;
+    color: #3730a3;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}

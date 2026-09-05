@@ -1,0 +1,52 @@
+[
+  {
+    "patientId": "P1001",
+    "name": "John Smith",
+    "age": 45,
+    "gender": "Male",
+    "condition": "Diabetes",
+    "email": "john.smith@example.com",
+    "phone": "+1-555-0101",
+    "address": "123 Main St, City, State 12345"
+  },
+  {
+    "patientId": "P1002",
+    "name": "Sarah Johnson",
+    "age": 38,
+    "gender": "Female",
+    "condition": "Hypertension",
+    "email": "sarah.johnson@example.com",
+    "phone": "+1-555-0102",
+    "address": "456 Oak Ave, City, State 12345"
+  },
+  {
+    "patientId": "P1003",
+    "name": "Michael Brown",
+    "age": 52,
+    "gender": "Male",
+    "condition": "Heart Disease",
+    "email": "michael.brown@example.com",
+    "phone": "+1-555-0103",
+    "address": "789 Pine Rd, City, State 12345"
+  },
+  {
+    "patientId": "P1004",
+    "name": "Emily Davis",
+    "age": 29,
+    "gender": "Female",
+    "condition": "None",
+    "email": "emily.davis@example.com",
+    "phone": "+1-555-0104",
+    "address": "321 Elm St, City, State 12345"
+  },
+  {
+    "patientId": "P1005",
+    "name": "Robert Wilson",
+    "age": 61,
+    "gender": "Male",
+    "condition": "Diabetes, Hypertension",
+    "email": "robert.wilson@example.com",
+    "phone": "+1-555-0105",
+    "address": "654 Maple Dr, City, State 12345"
+  }
+]

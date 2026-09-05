@@ -1,0 +1,93 @@
+[
+  {
+    "ruleId": "R001",
+    "name": "Diabetes - HbA1c Recommendation",
+    "condition": "Diabetes",
+    "triggerTest": "Lipid Panel",
+    "recommendedTest": "HbA1c",
+    "reason": "HbA1c is essential for monitoring long-term blood sugar control in diabetic patients, especially when cardiovascular tests are ordered.",
+    "priority": "high"
+  },
+  {
+    "ruleId": "R002",
+    "name": "Diabetes - Kidney Function Recommendation",
+    "condition": "Diabetes",
+    "triggerTest": "Lipid Panel",
+    "recommendedTest": "Kidney Function Test",
+    "reason": "Diabetes can affect kidney function over time. Regular kidney function monitoring is recommended for diabetic patients.",
+    "priority": "medium"
+  },
+  {
+    "ruleId": "R003",
+    "name": "Hypertension - Kidney Function Recommendation",
+    "condition": "Hypertension",
+    "triggerTest": "Complete Blood Count",
+    "recommendedTest": "Kidney Function Test",
+    "reason": "High blood pressure can impact kidney health. Kidney function tests help monitor for hypertension-related kidney damage.",
+    "priority": "medium"
+  },
+  {
+    "ruleId": "R004",
+    "name": "Heart Disease - Cardiac Panel Recommendation",
+    "condition": "Heart Disease",
+    "triggerTest": "Lipid Panel",
+    "recommendedTest": "Cardiac Enzyme Panel",
+    "reason": "Patients with heart disease should have comprehensive cardiac monitoring including enzyme panels alongside lipid testing.",
+    "priority": "high"
+  },
+  {
+    "ruleId": "R005",
+    "name": "Heart Disease - ECG Recommendation",
+    "condition": "Heart Disease",
+    "triggerTest": "Lipid Panel",
+    "recommendedTest": "ECG",
+    "reason": "Regular ECG monitoring is important for heart disease patients to detect arrhythmias or other cardiac abnormalities.",
+    "priority": "high"
+  },
+  {
+    "ruleId": "R006",
+    "name": "Thyroid Issues - Lipid Panel Recommendation",
+    "condition": "Hypothyroidism",
+    "triggerTest": "Thyroid Panel",
+    "recommendedTest": "Lipid Panel",
+    "reason": "Thyroid dysfunction can affect cholesterol levels. Lipid panel testing is recommended when thyroid issues are present.",
+    "priority": "medium"
+  },
+  {
+    "ruleId": "R007",
+    "name": "Multiple Conditions - Comprehensive Metabolic Recommendation",
+    "condition": "Diabetes, Hypertension",
+    "triggerTest": "Basic Metabolic Panel",
+    "recommendedTest": "Liver Function Test",
+    "reason": "Patients with multiple chronic conditions on multiple medications should have liver function monitored regularly.",
+    "priority": "medium"
+  },
+  {
+    "ruleId": "R008",
+    "name": "Age-Based - Vitamin D Recommendation",
+    "condition": "None",
+    "triggerTest": "Basic Metabolic Panel",
+    "recommendedTest": "Vitamin D Test",
+    "reason": "Vitamin D deficiency is common, especially in older adults. Consider testing when basic metabolic panels are ordered.",
+    "priority": "low",
+    "ageThreshold": 50
+  },
+  {
+    "ruleId": "R009",
+    "name": "Kidney Disease - Electrolyte Monitoring",
+    "condition": "Chronic Kidney Disease",
+    "triggerTest": "Kidney Function Test",
+    "recommendedTest": "Basic Metabolic Panel",
+    "reason": "CKD patients require regular electrolyte monitoring to maintain proper balance and prevent complications.",
+    "priority": "high"
+  },
+  {
+    "ruleId": "R010",
+    "name": "Liver Disease - Metabolic Monitoring",
+    "condition": "Liver Disease",
+    "triggerTest": "Liver Function Test",
+    "recommendedTest": "Basic Metabolic Panel",
+    "reason": "Liver disease can affect glucose and electrolyte metabolism. Comprehensive metabolic monitoring is recommended.",
+    "priority": "high"
+  }
+]
