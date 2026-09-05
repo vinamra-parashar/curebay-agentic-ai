@@ -19,6 +19,7 @@
 9. [How to Run](#-how-to-run)
 10. [Demo Scenarios](#-demo-scenarios)
 11. [Limitations](#-limitations)
+12. [Screenshots](#-screenshots)
 
 ---
 
@@ -434,3 +435,35 @@ Select any scenario from the **Demo Scenario dropdown** in the Patient Selection
 | **Gemini rate limits** | The free tier of Gemini has request-per-minute limits. Heavy demo usage may trigger rate limiting, causing the AI fallback path to activate. |
 | **No order history / versioning** | Once a test is added, there is no undo or order revision history. |
 | **Local MongoDB only** | The default setup assumes a local MongoDB instance. Atlas or a remote URI requires updating `MONGO_URI` in `.env`. |
+
+---
+
+## 📸 Screenshots
+
+Visual walkthrough of the Curebay Test-Panel Gap-Filler agent:
+
+### 1. Home Dashboard & Patient Profile
+*Initial view displaying the single-screen 2-column layout, demo scenario selector, patient metadata badges, and current tests.*
+
+![Home Dashboard](screenshots/home.png)
+
+---
+
+### 2. Clinical Gap Analysis & Recommendations
+*Rule-based gap detection enriched with Gemini AI explanations, priority badges, and merged clinical rationale.*
+
+![Analyze Order Results](screenshots/analyze-order-results.png)
+
+---
+
+### 3. Patient Confirmation & Order Update
+*Explicit confirmation dialog and updated order test list reflecting the added test in real time.*
+
+![Add Order Confirmation](screenshots/add-order.png)
+
+---
+
+### 4. Agent Audit Logs
+*Comprehensive audit log tracking order analysis, recommendations generated, user decisions, and database updates.*
+
+![Agent Audit Logs](screenshots/audit-logs.png)
