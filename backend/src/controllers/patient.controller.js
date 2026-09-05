@@ -25,9 +25,12 @@ async function getAllPatients(req, res) {
 
 async function createPatient(req, res) {
   try {
-    const patient = new Patient(req.body)
-    await patient.save()
-    res.status(201).json({ message: 'Patient created successfully', patient })
+    const patient = await Patient.findOneAndUpdate(
+      { patientId: req.body.patientId },
+      req.body,
+      { new: true, upsert: true }
+    )
+    res.status(201).json({ message: 'Patient created/updated successfully', patient })
   } catch (error) {
     console.error('Error creating patient:', error)
     res.status(500).json({ message: 'Something went wrong' })

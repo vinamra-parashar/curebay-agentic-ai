@@ -25,9 +25,12 @@ async function getAllOrders(req, res) {
 
 async function createOrder(req, res) {
   try {
-    const order = new Order(req.body)
-    await order.save()
-    res.status(201).json({ message: 'Order created successfully', order })
+    const order = await Order.findOneAndUpdate(
+      { orderId: req.body.orderId },
+      req.body,
+      { new: true, upsert: true }
+    )
+    res.status(201).json({ message: 'Order created/updated successfully', order })
   } catch (error) {
     console.error('Error creating order:', error)
     res.status(500).json({ message: 'Something went wrong' })

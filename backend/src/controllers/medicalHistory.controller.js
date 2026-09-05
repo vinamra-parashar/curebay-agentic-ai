@@ -15,9 +15,12 @@ async function getMedicalHistoryByPatientId(req, res) {
 
 async function createMedicalHistory(req, res) {
   try {
-    const history = new MedicalHistory(req.body)
-    await history.save()
-    res.status(201).json({ message: 'Medical history created successfully', history })
+    const history = await MedicalHistory.findOneAndUpdate(
+      { patientId: req.body.patientId },
+      req.body,
+      { new: true, upsert: true }
+    )
+    res.status(201).json({ message: 'Medical history created/updated successfully', history })
   } catch (error) {
     console.error('Error creating medical history:', error)
     res.status(500).json({ message: 'Something went wrong' })

@@ -25,9 +25,12 @@ async function getTestById(req, res) {
 
 async function createTest(req, res) {
   try {
-    const test = new Test(req.body)
-    await test.save()
-    res.status(201).json({ message: 'Test created successfully', test })
+    const test = await Test.findOneAndUpdate(
+      { testId: req.body.testId },
+      req.body,
+      { new: true, upsert: true }
+    )
+    res.status(201).json({ message: 'Test created/updated successfully', test })
   } catch (error) {
     console.error('Error creating test:', error)
     res.status(500).json({ message: 'Something went wrong' })

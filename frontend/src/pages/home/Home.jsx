@@ -350,18 +350,24 @@ const Home = () => {
         setError(null);
 
         try {
-            await testAPI.createTest({ testId: 'T001', testName: 'Complete Blood Count', category: 'Hematology', description: 'Blood test to evaluate overall health', price: 500 });
-            await testAPI.createTest({ testId: 'T002', testName: 'Lipid Profile', category: 'Biochemistry', description: 'Test to measure cholesterol levels', price: 800 });
-            await testAPI.createTest({ testId: 'T003', testName: 'Thyroid Function Test', category: 'Endocrinology', description: 'Test to check thyroid function', price: 600 });
-            await testAPI.createTest({ testId: 'T004', testName: 'Liver Function Test', category: 'Biochemistry', description: 'Test to evaluate liver health', price: 700 });
-            await testAPI.createTest({ testId: 'T005', testName: 'Kidney Function Test', category: 'Biochemistry', description: 'Test to evaluate kidney health', price: 600 });
-            await testAPI.createTest({ testId: 'T006', testName: 'HbA1c', category: 'Biochemistry', description: 'Test to measure average blood sugar levels over past 3 months', price: 400 });
-            await testAPI.createTest({ testId: 'T007', testName: 'Electrolyte Panel', category: 'Biochemistry', description: 'Test to measure electrolytes in the blood', price: 350 });
-            await testAPI.createTest({ testId: 'T008', testName: 'Urine Albumin', category: 'Clinical Pathology', description: 'Test to detect protein in urine for kidney health', price: 300 });
+            const sampleTests = [
+                { testId: 'T001', testName: 'Complete Blood Count', category: 'Hematology', description: 'Blood test to evaluate overall health', price: 500 },
+                { testId: 'T002', testName: 'Lipid Profile', category: 'Biochemistry', description: 'Test to measure cholesterol levels', price: 800 },
+                { testId: 'T003', testName: 'Thyroid Function Test', category: 'Endocrinology', description: 'Test to check thyroid function', price: 600 },
+                { testId: 'T004', testName: 'Liver Function Test', category: 'Biochemistry', description: 'Test to evaluate liver health', price: 700 },
+                { testId: 'T005', testName: 'Kidney Function Test', category: 'Biochemistry', description: 'Test to evaluate kidney health', price: 600 },
+                { testId: 'T006', testName: 'HbA1c', category: 'Biochemistry', description: 'Test to measure average blood sugar levels over past 3 months', price: 400 },
+                { testId: 'T007', testName: 'Electrolyte Panel', category: 'Biochemistry', description: 'Test to measure electrolytes in the blood', price: 350 },
+                { testId: 'T008', testName: 'Urine Albumin', category: 'Clinical Pathology', description: 'Test to detect protein in urine for kidney health', price: 300 }
+            ];
 
-            await patientAPI.createPatient({ patientId: 'P001', name: 'John Doe', age: 45, gender: 'Male', condition: 'Diabetes' });
-            await medicalHistoryAPI.createMedicalHistory({ patientId: 'P001', conditions: ['Diabetes', 'Hypertension'], allergies: ['Penicillin'], medications: ['Metformin', 'Lisinopril'] });
-            await orderAPI.createOrder({ orderId: 'ORD001', patientId: 'P001', tests: ['Complete Blood Count'], status: 'pending' });
+            for (const t of sampleTests) {
+                try { await testAPI.createTest(t); } catch (e) { /* ignore */ }
+            }
+
+            try { await patientAPI.createPatient({ patientId: 'P001', name: 'John Doe', age: 45, gender: 'Male', condition: 'Diabetes' }); } catch (e) {}
+            try { await medicalHistoryAPI.createMedicalHistory({ patientId: 'P001', conditions: ['Diabetes', 'Hypertension'], allergies: ['Penicillin'], medications: ['Metformin', 'Lisinopril'] }); } catch (e) {}
+            try { await orderAPI.createOrder({ orderId: 'ORD001', patientId: 'P001', tests: ['Complete Blood Count'], status: 'pending' }); } catch (e) {}
 
             await loadInitialData();
         } catch (err) {
@@ -428,51 +434,62 @@ const Home = () => {
                             </section>
                         ) : (
                             <>
-                                <div className="actions" style={{ marginBottom: '20px' }}>
-                                    <button className="secondary" onClick={createSampleData} disabled={loading}>
-                                        {loading ? 'Creating Data...' : 'Add Missing Tests'}
-                                    </button>
+                                {/* Top Toolbar: Scenario Selector & Quick Actions */}
+                                <div className="top-toolbar">
+                            <div className="toolbar-left">
+                                <div className="demo-select-row">
+                                    <label htmlFor="demo-scenario-select" className="demo-select-label">
+                                        🧪 Demo Scenario:
+                                    </label>
+                                    <select
+                                        id="demo-scenario-select"
+                                        className="demo-select"
+                                        value={activeScenarioId || ''}
+                                        onChange={(e) => {
+                                            const scenario = DEMO_SCENARIOS.find(s => s.id === e.target.value);
+                                            if (scenario) setupDemoScenario(scenario);
+                                        }}
+                                        disabled={scenarioLoading !== null || loading}
+                                    >
+                                        <option value="">-- Select a demo scenario --</option>
+                                        {DEMO_SCENARIOS.map(s => (
+                                            <option key={s.id} value={s.id}>
+                                                Scenario {s.number}: {s.title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {scenarioLoading && (
+                                        <span className="demo-select-loading">Setting up...</span>
+                                    )}
                                 </div>
 
-                                {/* Patient Selection */}
-                                <section className="card">
-                                    <h2>Patient Selection</h2>
-
-                                    {/* Demo Scenario dropdown */}
-                                    <div className="demo-select-row">
-                                        <label htmlFor="demo-scenario-select" className="demo-select-label">
-                                            🧪 Demo Scenario:
-                                        </label>
-                                        <select
-                                            id="demo-scenario-select"
-                                            className="demo-select"
-                                            value={activeScenarioId || ''}
-                                            onChange={(e) => {
-                                                const scenario = DEMO_SCENARIOS.find(s => s.id === e.target.value);
-                                                if (scenario) setupDemoScenario(scenario);
-                                            }}
-                                            disabled={scenarioLoading !== null || loading}
-                                        >
-                                            <option value="">-- Select a demo scenario --</option>
-                                            {DEMO_SCENARIOS.map(s => (
-                                                <option key={s.id} value={s.id}>
-                                                    Scenario {s.number}: {s.title}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {scenarioLoading && (
-                                            <span className="demo-select-loading">Setting up...</span>
-                                        )}
+                                {activeScenario && (
+                                    <div className="scenario-hint-inline">
+                                        💡 <strong>{activeScenario.title}:</strong> {activeScenario.hint}
                                     </div>
+                                )}
+                            </div>
 
-                                    {activeScenario && (
-                                        <div className="scenario-hint" style={{ marginBottom: '12px' }}>
-                                            💡 <strong>{activeScenario.title}:</strong> {activeScenario.hint}
-                                        </div>
-                                    )}
+                            <div className="toolbar-right">
+                                <button className="secondary btn-compact" onClick={createSampleData} disabled={loading}>
+                                    {loading ? 'Creating Data...' : 'Add Missing Tests'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* 2-Column Dashboard Grid */}
+                        <div className="dashboard-grid">
+                            {/* Left Column: Patient & Order Inputs */}
+                            <div className="panel-left">
+                                {/* Patient Selection Card */}
+                                <section className="card compact-card">
+                                    <div className="card-header">
+                                        <h2>👤 Patient Selection</h2>
+                                    </div>
 
                                     {patients.length > 0 ? (
                                         <select
+                                            className="select-compact"
                                             value={selectedPatient?.patientId || ''}
                                             onChange={(e) => {
                                                 setSelectedPatient(patients.find(p => p.patientId === e.target.value));
@@ -486,25 +503,29 @@ const Home = () => {
                                             ))}
                                         </select>
                                     ) : (
-                                        <p>No patients available. Load a demo scenario above.</p>
+                                        <p className="empty-text">No patients available.</p>
                                     )}
 
                                     {selectedPatient && (
-                                        <div className="info">
-                                            <strong>{selectedPatient.name}</strong>
-                                            <span>Age: {selectedPatient.age}</span>
-                                            <span>Gender: {selectedPatient.gender}</span>
-                                            <span>Condition: {selectedPatient.condition || 'None'}</span>
+                                        <div className="patient-meta">
+                                            <span className="meta-pill"><strong>Age:</strong> {selectedPatient.age}</span>
+                                            <span className="meta-pill"><strong>Gender:</strong> {selectedPatient.gender}</span>
+                                            <span className="meta-pill condition-pill">
+                                                <strong>Condition:</strong> {selectedPatient.condition || 'None'}
+                                            </span>
                                         </div>
                                     )}
                                 </section>
 
-                                {/* Order Selection */}
-                                <section className="card">
-                                    <h2>Order Selection</h2>
+                                {/* Order Selection Card */}
+                                <section className="card compact-card">
+                                    <div className="card-header">
+                                        <h2>📋 Order Selection</h2>
+                                    </div>
 
                                     {orders.length > 0 ? (
                                         <select
+                                            className="select-compact"
                                             value={selectedOrder?.orderId || ''}
                                             onChange={(e) => {
                                                 setSelectedOrder(orders.find(o => o.orderId === e.target.value));
@@ -516,126 +537,181 @@ const Home = () => {
                                         >
                                             {orders.map(order => (
                                                 <option key={order.orderId} value={order.orderId}>
-                                                    Order {order.orderId} - {order.status}
+                                                    Order {order.orderId} — {order.status}
                                                 </option>
                                             ))}
                                         </select>
                                     ) : (
-                                        <p>No orders available. Load a demo scenario above.</p>
+                                        <p className="empty-text">No orders available.</p>
                                     )}
 
                                     {currentOrderDisplay && (
-                                        <div className="order">
-                                            <h3>Current Tests:</h3>
-                                            {currentOrderDisplay.tests && currentOrderDisplay.tests.length > 0 ? (
-                                                currentOrderDisplay.tests.map((test, index) => (
-                                                    <span key={index}>{test}</span>
-                                                ))
-                                            ) : (
-                                                <span>No tests in order</span>
-                                            )}
+                                        <div className="order-tests-section">
+                                            <div className="tests-label">Current Tests in Order:</div>
+                                            <div className="test-chips-wrap">
+                                                {currentOrderDisplay.tests && currentOrderDisplay.tests.length > 0 ? (
+                                                    currentOrderDisplay.tests.map((test, index) => (
+                                                        <span key={index} className="test-chip">✓ {test}</span>
+                                                    ))
+                                                ) : (
+                                                    <span className="no-test-chip">No tests in order</span>
+                                                )}
+                                            </div>
                                         </div>
                                     )}
 
-                                    {selectedOrder && !showRecommendation && !orderUpdated && (
-                                        <button id="analyze-order-btn" onClick={analyzeOrder} disabled={loading}>
-                                            {loading ? 'Analyzing...' : 'Analyze Order'}
+                                    {selectedOrder && (
+                                        <button
+                                            id="analyze-order-btn"
+                                            className="analyze-btn"
+                                            onClick={analyzeOrder}
+                                            disabled={loading}
+                                        >
+                                            {loading ? 'Analyzing...' : (showRecommendation ? '⚡ Re-Analyze Order' : '⚡ Analyze Order')}
                                         </button>
                                     )}
                                 </section>
-                            </>
-                        )}
+                            </div>
 
-                        {/* AI Recommendation Panel */}
-                        {showRecommendation && analysisResult && (
-                            <section className="card recommendation">
-                                <h2>🤖 AI Recommendation</h2>
-
-                                {/* Active scenario context */}
-                                {activeScenario && (
-                                    <div className="scenario-context-banner">
-                                        🧪 <strong>{activeScenario.title}</strong> — {activeScenario.hint}
+                            {/* Right Column: AI Recommendations & Analysis */}
+                            <div className="panel-right">
+                                {/* Success Notification */}
+                                {orderUpdated && lastAddedTest && (
+                                    <div className="success-banner">
+                                        <span className="success-icon">✓</span>
+                                        <div className="success-content">
+                                            <div><strong>{lastAddedTest}</strong> has been added to order <strong>{selectedOrder?.orderId}</strong>.</div>
+                                            {activeScenario && (
+                                                <div className="success-scenario-note">
+                                                    Scenario {activeScenario.number} verified: test addition confirmed and order updated.
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 )}
 
-                                {/* AI fallback banner */}
-                                {analysisResult.aiFallback && (
-                                    <div className="ai-fallback-banner">
-                                        ⚠️ AI explanation is currently unavailable. Showing rule-based recommendations.
-                                    </div>
-                                )}
-
-                                {/* Summary from Gemini or default text */}
-                                <div className="recommendation-message">
-                                    <p>
-                                        {analysisResult.aiSummary ||
-                                            'Based on your profile and current order, we found the following potentially relevant tests.'}
-                                    </p>
-                                </div>
-
-                                {analysisResult.recommendations && analysisResult.recommendations.length > 0 ? (
-                                    <div className="recommendations-list">
-                                        <h3>Recommended Tests:</h3>
-                                        {analysisResult.recommendations.map((rec, index) => (
-                                            <div key={index} className="recommendation-item">
-                                                <strong>{rec.recommendedTest}</strong>
-                                                <span className={`priority-badge priority-${rec.priority}`}>
-                                                    Priority: {rec.priority.charAt(0).toUpperCase() + rec.priority.slice(1)}
+                                {showRecommendation && analysisResult ? (
+                                    <section className="card compact-card recommendation-card">
+                                        <div className="rec-header">
+                                            <h2>🤖 AI Clinical Recommendations</h2>
+                                            {activeScenario && (
+                                                <span className="scenario-badge-pill">
+                                                    Scenario {activeScenario.number}
                                                 </span>
-                                                {renderReasons(rec)}
-                                                <button
-                                                    id={`add-test-${index}`}
-                                                    onClick={() => requestAddTest(rec.recommendedTest)}
-                                                    disabled={loading}
-                                                >
-                                                    {loading ? 'Adding...' : `Add ${rec.recommendedTest}`}
-                                                </button>
-                                            </div>
-                                        ))}
-                                        <div className="actions">
-                                            <button
-                                                id="continue-without-adding"
-                                                className="secondary"
-                                                onClick={continueWithoutAdding}
-                                                disabled={loading}
-                                            >
-                                                No, Continue Without Adding
-                                            </button>
+                                            )}
                                         </div>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <p className="no-gaps-message">
-                                            No additional tests were identified based on the available information.
-                                        </p>
-                                        <div className="actions">
-                                            <button
-                                                id="continue-button"
-                                                onClick={continueWithoutAdding}
-                                                disabled={loading}
-                                            >
-                                                Continue
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                            </section>
-                        )}
 
-                        {/* Success State */}
-                        {orderUpdated && lastAddedTest && (
-                            <section className="success">
-                                ✓ <strong>{lastAddedTest}</strong> has been added to order <strong>{selectedOrder?.orderId}</strong>.
-                                {activeScenario && (
-                                    <div className="success-scenario-note">
-                                        Scenario {activeScenario.number} verified: test addition confirmed and order updated.
-                                    </div>
+                                        {/* AI fallback banner */}
+                                        {analysisResult.aiFallback && (
+                                            <div className="ai-fallback-banner">
+                                                ⚠️ AI explanation is currently unavailable. Showing rule-based recommendations.
+                                            </div>
+                                        )}
+
+                                        {/* Summary from Gemini or default text */}
+                                        <div className="rec-summary-box">
+                                            <p>
+                                                {analysisResult.aiSummary ||
+                                                    'Based on your profile and current order, we found the following potentially relevant tests.'}
+                                            </p>
+                                        </div>
+
+                                        {analysisResult.recommendations && analysisResult.recommendations.length > 0 ? (
+                                            <div className="recommendations-container">
+                                                <div className="recommendations-scroll">
+                                                    {analysisResult.recommendations.map((rec, index) => (
+                                                        <div key={index} className="recommendation-item">
+                                                            <div className="rec-item-header">
+                                                                <div className="rec-title-group">
+                                                                    <strong className="rec-title">{rec.recommendedTest}</strong>
+                                                                    <span className={`priority-badge priority-${rec.priority}`}>
+                                                                        {rec.priority.charAt(0).toUpperCase() + rec.priority.slice(1)}
+                                                                    </span>
+                                                                </div>
+                                                                <button
+                                                                    id={`add-test-${index}`}
+                                                                    className="btn-add-test"
+                                                                    onClick={() => requestAddTest(rec.recommendedTest)}
+                                                                    disabled={loading}
+                                                                >
+                                                                    {loading ? 'Adding...' : `+ Add ${rec.recommendedTest}`}
+                                                                </button>
+                                                            </div>
+                                                            {renderReasons(rec)}
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                <div className="rec-footer-actions">
+                                                    <button
+                                                        id="continue-without-adding"
+                                                        className="secondary btn-secondary-compact"
+                                                        onClick={continueWithoutAdding}
+                                                        disabled={loading}
+                                                    >
+                                                        No, Continue Without Adding
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="no-gaps-box">
+                                                <p className="no-gaps-message">
+                                                    No additional tests were identified based on the available information.
+                                                </p>
+                                                <div className="rec-footer-actions">
+                                                    <button
+                                                        id="continue-button"
+                                                        className="secondary btn-secondary-compact"
+                                                        onClick={continueWithoutAdding}
+                                                        disabled={loading}
+                                                    >
+                                                        Continue
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </section>
+                                ) : (
+                                    <section className="card compact-card standby-card">
+                                        <div className="standby-content">
+                                            <div className="standby-icon">🔬</div>
+                                            <h3>Clinical Gap Analysis Ready</h3>
+                                            <p className="standby-desc">
+                                                Select a patient and order on the left, then click <strong>"Analyze Order"</strong> to check for clinical gaps against evidence-based protocols and AI reasoning.
+                                            </p>
+                                            <div className="standby-features">
+                                                <div className="feature-item">
+                                                    <span className="feature-bullet">✓</span>
+                                                    <div>
+                                                        <strong>Deterministic Protocol Rules</strong>
+                                                        <span>Detects missing tests for chronic conditions & co-morbidities</span>
+                                                    </div>
+                                                </div>
+                                                <div className="feature-item">
+                                                    <span className="feature-bullet">✓</span>
+                                                    <div>
+                                                        <strong>Gemini AI Reasoning</strong>
+                                                        <span>Generates clinical justifications in clear patient language</span>
+                                                    </div>
+                                                </div>
+                                                <div className="feature-item">
+                                                    <span className="feature-bullet">✓</span>
+                                                    <div>
+                                                        <strong>Patient Guardrails</strong>
+                                                        <span>Explicit confirmation required before any test is added</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
                                 )}
-                            </section>
-                        )}
+                            </div>
+                        </div>
                     </>
                 )}
-            </main>
+            </>
+        )}
+    </main>
 
             {/* Confirmation Dialog Overlay */}
             {confirmDialog.open && (
